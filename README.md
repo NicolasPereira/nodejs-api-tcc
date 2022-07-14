@@ -5,6 +5,13 @@ Arquitetura Macro do Projeto:
 <img src='./docs/macro.jpg'>
 
 
+O Projeto de Conclusão de Curso tem como ideia facilitar a criação de lista de compras através do reconhecimento de imagem, dessa forma o usuário scanneia sua compra e armazenamos todos os itens de sua compra, na sua próxima compra o usuário deve apenas scannear os produtos que restaram, deste modo a aplicação deve gerar a lista de compras baseada nos itens da última compra e nos itens que o usuário já possui. 
+
+
+Está API tem a responsabilidade de se comunicar com a aplicação mobile, realizar a validação de regra de negócio e persistir os dados no banco de dados. 
+
+
+
 ## Tecnologias
 
 1 - NodeJS
