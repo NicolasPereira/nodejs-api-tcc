@@ -1,6 +1,6 @@
-import { config } from 'dotenv';
+import 'dotenv/config';
 import express from 'express';
-import { CreateUserController } from './src/controllers/createUserController';
+import { CreateUserController } from './src/controllers/createUserController.js';
 
 const routes = express.Router();
 
