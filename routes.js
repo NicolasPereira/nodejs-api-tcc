@@ -1,9 +1,18 @@
-const express = require('express');
+import { config } from 'dotenv';
+import express from 'express';
+import { CreateUserController } from './src/controllers/createUserController';
 
 const routes = express.Router();
 
+const createUser = new CreateUserController();
+
 routes.get("/", (req, res) => {
-    res.send("Hi Node and Docker!!!");
+    applicationName = process.env.APP_NAME;
+    res.send(`Hi Node and Docker!!! ${applicationName}`);
   });
 
-module.exports = routes;
+routes.post('/user',(req, res) => {
+    createUser.handle(req, res);
+});
+
+export { routes };
