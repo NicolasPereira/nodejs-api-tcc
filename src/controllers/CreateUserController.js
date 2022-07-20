@@ -1,4 +1,4 @@
-import { prismaClient } from '../../database/prismaClient';
+import { prismaClient } from '../../database/prismaClient.js';
 
 export class CreateUserController {
     async handle(request, response) {
