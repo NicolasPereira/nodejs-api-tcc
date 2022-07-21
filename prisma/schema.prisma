@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl"]
 }
 
 datasource db {
@@ -9,9 +10,9 @@ datasource db {
 
 model User {
   id String @id @default(uuid())
-  nome String 
+  name String 
   email String @unique
   password String
-  active_account Boolean @default(false)
+  active_account Boolean @default(true)
   @@map("users")
 }
