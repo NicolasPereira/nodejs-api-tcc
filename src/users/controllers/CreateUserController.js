@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client';
 import { prismaClient } from '../../../database/prismaClient.js';
 import { encryptPassword } from  '../utils/encrypt.js';
+
 export class CreateUserController {
     async handle(request, response) {
         const {name, email, password} = request.body;
