@@ -8,7 +8,7 @@ export class CreateUserController {
         try {
             const user = await prismaClient.user.create({
                 data: {
-                    nome: name,
+                    name,
                     email,
                     password: hashPassword
                 }
