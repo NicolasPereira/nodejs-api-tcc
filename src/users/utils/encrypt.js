@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt'
 
 export async function encryptPassword(password){
-    const salt = await bcrypt.genSalt(10);
+    console.log(process.env.SALT);
+    const salt = await bcrypt.genSalt(Number(process.env.SALT));
     return await bcrypt.hash(password, salt);
 }
