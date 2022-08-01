@@ -1,5 +1,5 @@
 import { prismaClient } from '../../../database/prismaClient.js';
-import { decryptPassword } from '../utils/decrypt.js';
+import { comparePassword } from '../utils/decrypt.js';
 import jwt from 'jsonwebtoken';
 
 export class AuthController {
@@ -10,23 +10,27 @@ export class AuthController {
               email: email
             },
           })
+        
         if (!user) {
-            return response.status(404).json({message:"Usuário não encontrado!"})
+            return response.status(401).json({message:"Usuário ou senha incorreta!"})
         }
 
         if (!user.active_account) {
             return response.status(401).json({message:"Usuário desativado"})
         }
-        const validatePassword = await decryptPassword(password, user.password);
+
+        const validatePassword = await comparePassword(password, user.password);
+        
         if (!validatePassword) {
             return response.status(401).json({message:"Senha Incorreta"})
         }
+
         delete user.password;
         const token = jwt.sign({user: user}, process.env.SECRET);
           return response.status(200).json({
               message: "Usuário autenticado",
-              user: user,
-              token: token
+              user,
+              token
           })
     }
 }
