@@ -16,7 +16,7 @@ export class AuthController {
         }
 
         if (!user.active_account) {
-            return response.status(401).json({message:"Usuário desativado"})
+            return response.status(403).json({message:"Usuário desativado"})
         }
 
         const validatePassword = await comparePassword(password, user.password);
