@@ -1,6 +1,6 @@
 import { prismaClient } from '../../../database/prismaClient.js';
 import { comparePassword } from '../utils/decrypt.js';
-import jwt from 'jsonwebtoken';
+import { generateToken } from '../utils/generateToken.js';
 
 export class AuthController {
     async authenticate(request, response) {
@@ -26,8 +26,10 @@ export class AuthController {
         }
 
         delete user.password;
-        const token = jwt.sign({user: user}, process.env.SECRET);
-          return response.status(200).json({
+
+        const token = await generateToken(user);
+        
+        return response.status(200).json({
               message: "Usuário autenticado",
               user,
               token
