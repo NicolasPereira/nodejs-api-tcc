@@ -1,5 +1,5 @@
 import {body} from 'express-validator'
-import { validatePayloadMiddleware } from '../../users/middlewares/payloadValidatorMiddleware.js'
+import { validatePayloadMiddleware } from '../../shared/middlewares/payloadValidatorMiddleware.js'
 
 const loginValidator = 
     [
