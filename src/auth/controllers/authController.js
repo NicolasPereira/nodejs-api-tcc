@@ -22,7 +22,7 @@ export class AuthController {
         const validatePassword = await comparePassword(password, user.password);
         
         if (!validatePassword) {
-            return response.status(401).json({message:"Senha Incorreta"})
+            return response.status(401).json({message:"Usuário ou senha incorreta!"})
         }
 
         delete user.password;
