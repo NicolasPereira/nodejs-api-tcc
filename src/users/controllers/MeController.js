@@ -12,7 +12,9 @@ export class MeController {
     }
 
     return res.status(200).json({
-      user,
+      id: user.id,
+      name: user.name,
+      email: user.email,
     });
   }
 }
