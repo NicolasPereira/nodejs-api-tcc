@@ -4,7 +4,7 @@ import { validatePayloadMiddleware } from "../../shared/middlewares/payloadValid
 const createShoppingListValidator = [
   body("title").notEmpty().withMessage("O campo título é obrigatório"),
   body("title")
-    .isLength({ max: 2555 })
+    .isLength({ max: 255 })
     .withMessage("O título deve ter no máximo 255 caracteres"),
   validatePayloadMiddleware,
 ];
