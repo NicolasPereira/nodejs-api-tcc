@@ -32,7 +32,7 @@ routes.get("/users/me", authMiddleware, meController.handle);
 routes.post("/login", loginValidator, authUserController.authenticate);
 
 routes.post(
-  "/shoppingList",
+  "/shopping-list",
   createShoppingListValidator,
   authMiddleware,
   createShoppingList.handle
