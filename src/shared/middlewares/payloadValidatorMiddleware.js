@@ -1,10 +1,12 @@
-import {validationResult} from 'express-validator';
-
+import { validationResult } from "express-validator";
+import { StatusCodes } from "http-status-codes";
 const validatePayloadMiddleware = (req, res, next) => {
-    const errors = validationResult(req)
-    if (!errors.isEmpty()) {
-        return res.status(422).json({ errors: errors.array() });
-      }
-      return next();
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    return res
+      .status(StatusCodes.UNPROCESSABLE_ENTITY)
+      .json({ errors: errors.array() });
   }
-export {validatePayloadMiddleware}
+  return next();
+};
+export { validatePayloadMiddleware };
