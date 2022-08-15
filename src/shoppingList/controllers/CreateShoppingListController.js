@@ -1,4 +1,5 @@
 import { createShoppingList } from "../repository/shoppingListRepository.js";
+import { StatusCodes } from "http-status-codes";
 
 export class CreateShoppingListController {
   async handle(req, res) {
@@ -7,7 +8,7 @@ export class CreateShoppingListController {
 
     const shoppingList = await createShoppingList(title, userId);
 
-    return res.status(200).json({
+    return res.status(StatusCodes.CREATED).json({
       id: shoppingList.id,
       title: shoppingList.title,
     });
