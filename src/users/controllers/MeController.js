@@ -6,13 +6,17 @@ export class MeController {
     const user = await findUserById(req.userId);
 
     if (!user) {
-      return res.status(StatusCodes.NOT_FOUND).json({
+      return res
+      .status(StatusCodes.NOT_FOUND)
+      .json({
         error: true,
         message: "Usuário não encontrado",
       });
     }
 
-    return res.status(StatusCodes.OK).json({
+    return res
+    .status(StatusCodes.OK)
+    .json({
       id: user.id,
       name: user.name,
       email: user.email,

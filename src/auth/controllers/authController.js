@@ -37,7 +37,6 @@ export class AuthController {
     const token = await generateToken(user);
 
     return response.status(StatusCodes.OK).json({
-      message: "Usuário autenticado",
       user,
       token,
     });

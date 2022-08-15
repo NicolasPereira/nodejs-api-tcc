@@ -3,10 +3,12 @@ import { StatusCodes } from "http-status-codes";
 
 const authMiddleware = (req, res, next) => {
   const token = req.headers["authorization"];
-  if (!token)
+  if (!token) {
     return res
       .status(StatusCodes.UNAUTHORIZED)
       .json({ error: true, message: "Token de autenticação não fornecido" });
+  }
+
 
   const result = validateToken(token);
 

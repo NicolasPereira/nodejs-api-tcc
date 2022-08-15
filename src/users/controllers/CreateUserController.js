@@ -16,7 +16,9 @@ export class CreateUserController {
         },
       });
 
-      return response.status(StatusCodes.CREATED).json({
+      return response
+        .status(StatusCodes.CREATED)
+        .json({
         id: user.id,
         name: user.name,
       });
