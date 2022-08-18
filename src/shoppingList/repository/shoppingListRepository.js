@@ -10,7 +10,7 @@ async function createShoppingList(title, userId) {
 }
 
 async function findShoppingListById(id) {
-  return await prismaClient.shoppingList.findUnique({
+  return prismaClient.shoppingList.findUnique({
     where: {
       id: id,
     },
