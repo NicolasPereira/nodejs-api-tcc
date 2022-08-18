@@ -20,20 +20,22 @@ model User {
 }
 
 model ShoppingList {
-  id                  Int                   @id @default(autoincrement())
-  createdAt           DateTime              @default(now())
-  title               String                @db.VarChar(255)
-  finished            Boolean               @default(false)
-  user                User                  @relation(fields: [userId], references: [id])
-  userId              String
-  ShoppingListProduct ShoppingListProduct[]
+  id                   Int                    @id @default(autoincrement())
+  createdAt            DateTime               @default(now())
+  title                String                 @db.VarChar(255)
+  finished             Boolean                @default(false)
+  user                 User                   @relation(fields: [userId], references: [id])
+  userId               String
+  ShoppingListProducts ShoppingListProducts[]
 
   @@map("shopping_lists")
 }
 
-model ShoppingListProduct {
+model ShoppingListProducts {
   id             Int          @id @default(autoincrement())
   name           String       @db.VarChar(50)
   shoppingList   ShoppingList @relation(fields: [shoppingListId], references: [id])
   shoppingListId Int
+
+  @@map("shopping_lists_products")
 }
