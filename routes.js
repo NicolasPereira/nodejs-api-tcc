@@ -8,6 +8,7 @@ import { createUserValidator } from "./src/users/validators/createUserValidator.
 import { createShoppingListValidator } from "./src/shoppingList/validators/createShoppingListValidator.js";
 import { loginValidator } from "./src/auth/validators/loginValidator.js";
 import { authMiddleware } from "./src/shared/middlewares/authMiddleware.js";
+import { createShoppingListProductsValidator } from "./src/shoppingListProducts/validators/createProductsValidator.js";
 import { config } from "./src/shared/config/config.js";
 import { ShoppingListProductsController } from "./src/shoppingListProducts/controllers/ShoppingListProductsController.js";
 const routes = express.Router();
@@ -42,6 +43,7 @@ routes.post(
 routes.post(
   "/shopping-list/:idShoppingList/products",
   authMiddleware,
+  createShoppingListProductsValidator,
   shoppingListProductsController.create
 );
 
