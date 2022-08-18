@@ -9,13 +9,14 @@ import { createShoppingListValidator } from "./src/shoppingList/validators/creat
 import { loginValidator } from "./src/auth/validators/loginValidator.js";
 import { authMiddleware } from "./src/shared/middlewares/authMiddleware.js";
 import { config } from "./src/shared/config/config.js";
-
+import { ShoppingListProductsController } from "./src/shoppingListProducts/controllers/ShoppingListProductsController.js";
 const routes = express.Router();
 
 const createUser = new CreateUserController();
 const authUserController = new AuthController();
 const meController = new MeController();
 const createShoppingList = new CreateShoppingListController();
+const shoppingListProductsController = new ShoppingListProductsController();
 
 routes.post("/", authMiddleware, (req, res) => {
   const applicationName = config.APP_NAME;
@@ -36,6 +37,12 @@ routes.post(
   createShoppingListValidator,
   authMiddleware,
   createShoppingList.handle
+);
+
+routes.post(
+  "/shopping-list/:idShoppingList/products",
+  authMiddleware,
+  shoppingListProductsController.create
 );
 
 export { routes };
