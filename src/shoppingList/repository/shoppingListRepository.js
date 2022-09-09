@@ -29,6 +29,11 @@ async function findShoppingListById(id) {
 
 async function findShoppingListByUserId(userId) {
   return prismaClient.shoppingList.findMany({
+    orderBy: [
+      {
+        id: "desc",
+      },
+    ],
     where: {
       userId: userId,
     },
