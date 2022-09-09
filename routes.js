@@ -1,7 +1,7 @@
 import dotenv from "dotenv";
 import express from "express";
 import { AuthController } from "./src/auth/controllers/authController.js";
-import { CreateUserController } from "./src/users/controllers/createUserController.js";
+import { CreateUserController } from "./src/users/controllers/CreateUserController.js";
 import { MeController } from "./src/users/controllers/MeController.js";
 import { CreateShoppingListController } from "./src/shoppingList/controllers/CreateShoppingListController.js";
 import { createUserValidator } from "./src/users/validators/createUserValidator.js";
