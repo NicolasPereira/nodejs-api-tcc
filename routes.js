@@ -47,7 +47,7 @@ routes.post(
   shoppingListProductsController.create
 );
 
-routes.get("/", (req, res) => {
+routes.get("/health", (req, res) => {
   const applicationName = config.APP_NAME;
 
   res.json({
