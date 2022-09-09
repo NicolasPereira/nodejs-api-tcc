@@ -1,4 +1,5 @@
 import dotenv from "dotenv";
+import { prismaClient } from "./database/prismaClient.js";
 import express from "express";
 import { AuthController } from "./src/auth/controllers/authController.js";
 import { CreateUserController } from "./src/users/controllers/CreateUserController.js";
@@ -48,10 +49,11 @@ routes.post(
 );
 
 routes.get("/health", (req, res) => {
-  const applicationName = config.APP_NAME;
+  const dbStatus = prismaClient.$queryRaw`SELECT 1`;
 
-  res.json({
-    message: `Aplicação: ${applicationName} - Tá rodando no servidor`,
+  res.status(200).json({
+    app: "ok",
+    db: dbStatus,
   });
 });
 
