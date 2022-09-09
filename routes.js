@@ -47,4 +47,12 @@ routes.post(
   shoppingListProductsController.create
 );
 
+routes.get("/", (req, res) => {
+  const applicationName = config.APP_NAME;
+
+  res.json({
+    message: `Aplicação: ${applicationName} - Tá rodando no servidor`,
+  });
+});
+
 export { routes };
