@@ -34,7 +34,7 @@ routes.post("/users", createUserValidator, createUser.handle);
 routes.get("/users/me", authMiddleware, meController.handle);
 
 routes.get(
-  "/users/me/shopping-list",
+  "/users/me/shopping-lists",
   authMiddleware,
   findShoppingListByUser.handle
 );
