@@ -46,20 +46,20 @@ routes.get(
 routes.post("/login", loginValidator, authUserController.authenticate);
 
 routes.post(
-  "/shopping-list",
+  "/shopping-lists",
   createShoppingListValidator,
   authMiddleware,
   createShoppingList.handle
 );
 
 routes.get(
-  "/shopping-list/:idShoppingList",
+  "/shopping-lists/:idShoppingList",
   authMiddleware,
   findShoppingListById.handle
 );
 
 routes.post(
-  "/shopping-list/:idShoppingList/products",
+  "/shopping-lists/:idShoppingList/products",
   authMiddleware,
   createShoppingListProductsValidator,
   shoppingListProductsController.create
