@@ -7,8 +7,6 @@ export class FindShoppingListByUserController {
 
     const shoppingList = await findShoppingListByUserId(userId);
 
-    return res.status(StatusCodes.OK).json({
-      shoppingList,
-    });
+    return res.status(StatusCodes.OK).json(shoppingList);
   }
 }
