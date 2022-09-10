@@ -13,6 +13,8 @@ import { createShoppingListProductsValidator } from "./src/shoppingListProducts/
 import { config } from "./src/shared/config/config.js";
 import { ShoppingListProductsController } from "./src/shoppingListProducts/controllers/ShoppingListProductsController.js";
 import { FindShoppingListByUserController } from "./src/shoppingList/controllers/FindShoppingListByUserController.js";
+import { FindShoppingListByIdController } from "./src/shoppingList/controllers/FindShoppingListByIdController.js";
+
 const routes = express.Router();
 
 const createUser = new CreateUserController();
@@ -21,6 +23,7 @@ const meController = new MeController();
 const createShoppingList = new CreateShoppingListController();
 const shoppingListProductsController = new ShoppingListProductsController();
 const findShoppingListByUser = new FindShoppingListByUserController();
+const findShoppingListById = new FindShoppingListByIdController();
 
 routes.post("/", authMiddleware, (req, res) => {
   const applicationName = config.APP_NAME;
@@ -43,14 +46,20 @@ routes.get(
 routes.post("/login", loginValidator, authUserController.authenticate);
 
 routes.post(
-  "/shopping-list",
+  "/shopping-lists",
   createShoppingListValidator,
   authMiddleware,
   createShoppingList.handle
 );
 
+routes.get(
+  "/shopping-lists/:idShoppingList",
+  authMiddleware,
+  findShoppingListById.handle
+);
+
 routes.post(
-  "/shopping-list/:idShoppingList/products",
+  "/shopping-lists/:idShoppingList/products",
   authMiddleware,
   createShoppingListProductsValidator,
   shoppingListProductsController.create
