@@ -27,4 +27,21 @@ async function findShoppingListById(id) {
   });
 }
 
-export { createShoppingList, findShoppingListById };
+async function findShoppingListByUserId(userId) {
+  return prismaClient.shoppingList.findMany({
+    orderBy: [
+      {
+        id: "desc",
+      },
+    ],
+    where: {
+      userId: userId,
+    },
+    select: {
+      id: true,
+      title: true,
+    },
+  });
+}
+
+export { createShoppingList, findShoppingListById, findShoppingListByUserId };
