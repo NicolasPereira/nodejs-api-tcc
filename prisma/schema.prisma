@@ -53,10 +53,10 @@ model Purchases {
 }
 
 model PurchasedProducts {
-  id          Int       @id @default(autoincrement())
-  name        String    @db.VarChar(50)
-  Purchases   Purchases @relation(fields: [purchasesId], references: [id])
-  purchasesId Int
+  id         Int       @id @default(autoincrement())
+  name       String    @db.VarChar(50)
+  Purchases  Purchases @relation(fields: [purchaseId], references: [id])
+  purchaseId Int
 
   @@map("purchased_products")
 }
