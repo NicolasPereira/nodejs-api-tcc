@@ -45,8 +45,6 @@ export class PurchaseController {
       });
     }
 
-    return res.status(StatusCodes.OK).json({
-      purchase,
-    });
+    return res.status(StatusCodes.OK).json(purchase);
   }
 }
