@@ -81,6 +81,12 @@ routes.get(
   purchaseController.findUserPurchases
 );
 
+routes.get(
+  "/purchases/:idPurchase",
+  authMiddleware,
+  purchaseController.findPurchaseById
+);
+
 routes.get("/health", (req, res) => {
   const dbStatus = prismaClient.$queryRaw`SELECT 1`;
 
