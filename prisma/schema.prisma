@@ -15,6 +15,7 @@ model User {
   password       String
   active_account Boolean        @default(true)
   shoppingLists  ShoppingList[]
+  purchases      Purchases[]
 
   @@map("users")
 }
@@ -38,4 +39,24 @@ model ShoppingListProducts {
   shoppingListId Int
 
   @@map("shopping_lists_products")
+}
+
+model Purchases {
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now())
+  title             String              @db.VarChar(255)
+  user              User                @relation(fields: [userId], references: [id])
+  userId            String
+  PurchasedProducts PurchasedProducts[]
+
+  @@map("purchases")
+}
+
+model PurchasedProducts {
+  id          Int       @id @default(autoincrement())
+  name        String    @db.VarChar(50)
+  Purchases   Purchases @relation(fields: [purchasesId], references: [id])
+  purchasesId Int
+
+  @@map("purchased_products")
 }
