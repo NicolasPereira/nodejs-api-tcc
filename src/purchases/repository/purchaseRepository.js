@@ -27,4 +27,23 @@ async function findPurchasesByUserId(userId) {
   });
 }
 
-export { createPurchase, findPurchasesByUserId };
+async function findPurchaseById(id) {
+  return prismaClient.purchases.findUnique({
+    where: {
+      id: id,
+    },
+    select: {
+      id: true,
+      title: true,
+      createdAt: true,
+      PurchasedProducts: {
+        select: {
+          id: true,
+          name: true,
+        },
+      },
+    },
+  });
+}
+
+export { createPurchase, findPurchasesByUserId, findPurchaseById };
