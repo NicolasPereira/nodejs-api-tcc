@@ -40,6 +40,7 @@ async function findShoppingListByUserId(userId) {
     select: {
       id: true,
       title: true,
+      createdAt: true,
     },
   });
 }
