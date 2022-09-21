@@ -14,6 +14,8 @@ import { config } from "./src/shared/config/config.js";
 import { ShoppingListProductsController } from "./src/shoppingListProducts/controllers/ShoppingListProductsController.js";
 import { FindShoppingListByUserController } from "./src/shoppingList/controllers/FindShoppingListByUserController.js";
 import { FindShoppingListByIdController } from "./src/shoppingList/controllers/FindShoppingListByIdController.js";
+import { PurchaseController } from "./src/purchases/controllers/PurchaseController.js";
+import { createPurchaseValidator } from "./src/purchases/validators/createPurchaseValidator.js";
 
 const routes = express.Router();
 
@@ -24,6 +26,7 @@ const createShoppingList = new CreateShoppingListController();
 const shoppingListProductsController = new ShoppingListProductsController();
 const findShoppingListByUser = new FindShoppingListByUserController();
 const findShoppingListById = new FindShoppingListByIdController();
+const purchaseController = new PurchaseController();
 
 routes.post("/", authMiddleware, (req, res) => {
   const applicationName = config.APP_NAME;
@@ -63,6 +66,13 @@ routes.post(
   authMiddleware,
   createShoppingListProductsValidator,
   shoppingListProductsController.create
+);
+
+routes.post(
+  "/purchases",
+  createPurchaseValidator,
+  authMiddleware,
+  purchaseController.create
 );
 
 routes.get("/health", (req, res) => {
