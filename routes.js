@@ -16,6 +16,8 @@ import { FindShoppingListByUserController } from "./src/shoppingList/controllers
 import { FindShoppingListByIdController } from "./src/shoppingList/controllers/FindShoppingListByIdController.js";
 import { PurchaseController } from "./src/purchases/controllers/PurchaseController.js";
 import { createPurchaseValidator } from "./src/purchases/validators/createPurchaseValidator.js";
+import { PurchasedProductsController } from "./src/purchasedProducts/controllers/PurchasedProductsController.js";
+import { createPurchasedProductsValidator } from "./src/purchasedProducts/validators/createPurchasedProductsValidator.js";
 
 const routes = express.Router();
 
@@ -27,6 +29,7 @@ const shoppingListProductsController = new ShoppingListProductsController();
 const findShoppingListByUser = new FindShoppingListByUserController();
 const findShoppingListById = new FindShoppingListByIdController();
 const purchaseController = new PurchaseController();
+const purchasedProductsController = new PurchasedProductsController();
 
 routes.post("/", authMiddleware, (req, res) => {
   const applicationName = config.APP_NAME;
@@ -85,6 +88,13 @@ routes.get(
   "/purchases/:idPurchase",
   authMiddleware,
   purchaseController.findPurchaseById
+);
+
+routes.post(
+  "/purchases/:idPurchase/products",
+  authMiddleware,
+  createPurchasedProductsValidator,
+  purchasedProductsController.create
 );
 
 routes.get("/health", (req, res) => {
