@@ -71,6 +71,12 @@ routes.post(
   shoppingListProductsController.create
 );
 
+routes.delete(
+  "/shopping-lists/:idShoppingList/products/:idProduct",
+  authMiddleware,
+  shoppingListProductsController.deleteProduct
+);
+
 routes.post(
   "/purchases",
   createPurchaseValidator,
