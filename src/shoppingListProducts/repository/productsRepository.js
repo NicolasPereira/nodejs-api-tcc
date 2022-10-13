@@ -9,4 +9,12 @@ async function insertProductsInShoppingList(products, shoppingListId) {
   });
 }
 
-export { insertProductsInShoppingList };
+async function deleteProductsInShoppingList(productId) {
+  await prismaClient.shoppingListProducts.delete({
+    where: {
+      id: productId,
+    },
+  });
+}
+
+export { insertProductsInShoppingList, deleteProductsInShoppingList };
