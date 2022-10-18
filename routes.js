@@ -18,7 +18,7 @@ import { PurchaseController } from "./src/purchases/controllers/PurchaseControll
 import { createPurchaseValidator } from "./src/purchases/validators/createPurchaseValidator.js";
 import { PurchasedProductsController } from "./src/purchasedProducts/controllers/PurchasedProductsController.js";
 import { createPurchasedProductsValidator } from "./src/purchasedProducts/validators/createPurchasedProductsValidator.js";
-
+import { DeleteShoppingListController } from "./src/shoppingList/controllers/DeleteShoppingListController.js";
 const routes = express.Router();
 
 const createUser = new CreateUserController();
@@ -30,6 +30,7 @@ const findShoppingListByUser = new FindShoppingListByUserController();
 const findShoppingListById = new FindShoppingListByIdController();
 const purchaseController = new PurchaseController();
 const purchasedProductsController = new PurchasedProductsController();
+const deleteShoppingListController = new DeleteShoppingListController();
 
 routes.post("/", authMiddleware, (req, res) => {
   const applicationName = config.APP_NAME;
@@ -75,6 +76,12 @@ routes.delete(
   "/shopping-lists/:idShoppingList/products/:idProduct",
   authMiddleware,
   shoppingListProductsController.deleteProduct
+);
+
+routes.delete(
+  "/shopping-lists/:idShoppingList",
+  authMiddleware,
+  deleteShoppingListController.handle
 );
 
 routes.post(
