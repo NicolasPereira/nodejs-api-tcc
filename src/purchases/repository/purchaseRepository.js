@@ -1,5 +1,5 @@
 import { prismaClient } from "../../../database/prismaClient.js";
-
+import { Prisma } from "@prisma/client";
 async function createPurchase(title, userId) {
   return await prismaClient.purchases.create({
     data: {
