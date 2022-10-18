@@ -103,6 +103,12 @@ routes.get(
   purchaseController.findPurchaseById
 );
 
+routes.delete(
+  "/purchases/:idPurchase/",
+  authMiddleware,
+  purchaseController.deletePurchase
+);
+
 routes.post(
   "/purchases/:idPurchase/products",
   authMiddleware,

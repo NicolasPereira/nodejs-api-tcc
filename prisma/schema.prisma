@@ -55,7 +55,7 @@ model Purchases {
 model PurchasedProducts {
   id         Int       @id @default(autoincrement())
   name       String    @db.VarChar(50)
-  Purchases  Purchases @relation(fields: [purchaseId], references: [id])
+  Purchases  Purchases @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
   purchaseId Int
 
   @@map("purchased_products")
