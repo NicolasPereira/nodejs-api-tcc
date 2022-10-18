@@ -46,4 +46,26 @@ async function findPurchaseById(id) {
   });
 }
 
-export { createPurchase, findPurchasesByUserId, findPurchaseById };
+async function deletePurchase(id) {
+  try {
+    const deletedList = await prismaClient.purchases.delete({
+      where: {
+        id: id,
+      },
+    });
+    return deletedList;
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      return {
+        errorCode: e.errorCode,
+        message: e.message,
+      };
+    }
+  }
+}
+export {
+  createPurchase,
+  findPurchasesByUserId,
+  findPurchaseById,
+  deletePurchase,
+};
