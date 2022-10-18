@@ -35,7 +35,7 @@ model ShoppingList {
 model ShoppingListProducts {
   id             Int          @id @default(autoincrement())
   name           String       @db.VarChar(50)
-  shoppingList   ShoppingList @relation(fields: [shoppingListId], references: [id])
+  shoppingList   ShoppingList @relation(fields: [shoppingListId], references: [id], onDelete: Cascade)
   shoppingListId Int
 
   @@map("shopping_lists_products")
