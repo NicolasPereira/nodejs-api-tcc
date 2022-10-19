@@ -9,4 +9,16 @@ async function insertProductsInPurchased(products, purchaseId) {
   });
 }
 
-export { insertProductsInPurchased };
+async function findProductsByPurchaseId(id) {
+  const products = await prismaClient.purchasedProducts.findMany({
+    where: {
+      purchaseId: id,
+    },
+    select: {
+      name: true,
+    },
+  });
+  return products;
+}
+
+export { insertProductsInPurchased, findProductsByPurchaseId };

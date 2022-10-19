@@ -46,6 +46,18 @@ async function findPurchaseById(id) {
   });
 }
 
+async function findLastPurchaseByUser(userId) {
+  return prismaClient.purchases.findFirst({
+    where: {
+      userId: userId
+    },
+    orderBy: {
+      id: 'asc',
+    },
+    take: -1, 
+  })
+}
+
 async function deletePurchase(id) {
   try {
     const deletedList = await prismaClient.purchases.delete({
@@ -68,4 +80,5 @@ export {
   findPurchasesByUserId,
   findPurchaseById,
   deletePurchase,
+  findLastPurchaseByUser
 };
