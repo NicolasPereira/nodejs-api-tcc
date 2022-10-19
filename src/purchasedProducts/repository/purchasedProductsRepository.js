@@ -9,4 +9,15 @@ async function insertProductsInPurchased(products, purchaseId) {
   });
 }
 
-export { insertProductsInPurchased };
+async function findProductsByPurchaseId(purchaseId) {
+  await prismaClient.purchasedProducts.findUnique({
+    where: {
+      purchaseId: purchaseId
+    },
+    select: {
+      name: true,
+    }
+  })
+}
+
+export { insertProductsInPurchased, findProductsByPurchaseId };

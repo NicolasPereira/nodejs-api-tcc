@@ -46,4 +46,16 @@ async function findPurchaseById(id) {
   });
 }
 
-export { createPurchase, findPurchasesByUserId, findPurchaseById };
+async function findLastPurchaseByUser(userId) {
+  return prismaClient.purchases.findFirst({
+    where: {
+      userId: userId
+    },
+    orderBy: {
+      id: 'asc',
+    },
+    take: -1, 
+  })
+}
+
+export { createPurchase, findPurchasesByUserId, findPurchaseById, findLastPurchaseByUser };
