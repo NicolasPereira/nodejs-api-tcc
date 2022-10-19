@@ -1,5 +1,5 @@
 import { prismaClient } from "../../../database/prismaClient.js";
-
+import { Prisma } from "@prisma/client";
 async function createPurchase(title, userId) {
   return await prismaClient.purchases.create({
     data: {
@@ -46,16 +46,26 @@ async function findPurchaseById(id) {
   });
 }
 
-async function findLastPurchaseByUser(userId) {
-  return prismaClient.purchases.findFirst({
-    where: {
-      userId: userId
-    },
-    orderBy: {
-      id: 'asc',
-    },
-    take: -1, 
-  })
+async function deletePurchase(id) {
+  try {
+    const deletedList = await prismaClient.purchases.delete({
+      where: {
+        id: id,
+      },
+    });
+    return deletedList;
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      return {
+        errorCode: e.errorCode,
+        message: e.message,
+      };
+    }
+  }
 }
-
-export { createPurchase, findPurchasesByUserId, findPurchaseById, findLastPurchaseByUser };
+export {
+  createPurchase,
+  findPurchasesByUserId,
+  findPurchaseById,
+  deletePurchase,
+};

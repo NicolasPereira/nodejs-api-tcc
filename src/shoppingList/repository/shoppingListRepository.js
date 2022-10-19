@@ -1,7 +1,7 @@
 import { prismaClient } from "../../../database/prismaClient.js";
-
+import { Prisma } from "@prisma/client";
 async function createShoppingList(title, userId) {
-  return await prismaClient.shoppingList.create({
+  return prismaClient.shoppingList.create({
     data: {
       title,
       userId,
@@ -21,6 +21,10 @@ async function findShoppingListById(id) {
         select: {
           id: true,
           name: true,
+          checked: true,
+        },
+        orderBy: {
+          id: "asc",
         },
       },
     },
@@ -45,4 +49,27 @@ async function findShoppingListByUserId(userId) {
   });
 }
 
-export { createShoppingList, findShoppingListById, findShoppingListByUserId };
+async function deleteShoppingList(id) {
+  try {
+    const deletedList = await prismaClient.shoppingList.delete({
+      where: {
+        id: id,
+      },
+    });
+    return deletedList;
+  } catch (e) {
+    if (e instanceof Prisma.PrismaClientKnownRequestError) {
+      return {
+        errorCode: e.errorCode,
+        message: e.message,
+      };
+    }
+  }
+}
+
+export {
+  createShoppingList,
+  findShoppingListById,
+  findShoppingListByUserId,
+  deleteShoppingList,
+};

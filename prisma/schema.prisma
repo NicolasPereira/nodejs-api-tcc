@@ -35,8 +35,9 @@ model ShoppingList {
 model ShoppingListProducts {
   id             Int          @id @default(autoincrement())
   name           String       @db.VarChar(50)
-  shoppingList   ShoppingList @relation(fields: [shoppingListId], references: [id])
+  shoppingList   ShoppingList @relation(fields: [shoppingListId], references: [id], onDelete: Cascade)
   shoppingListId Int
+  checked        Boolean      @default(false)
 
   @@map("shopping_lists_products")
 }
@@ -55,7 +56,7 @@ model Purchases {
 model PurchasedProducts {
   id         Int       @id @default(autoincrement())
   name       String    @db.VarChar(50)
-  Purchases  Purchases @relation(fields: [purchaseId], references: [id])
+  Purchases  Purchases @relation(fields: [purchaseId], references: [id], onDelete: Cascade)
   purchaseId Int
 
   @@map("purchased_products")

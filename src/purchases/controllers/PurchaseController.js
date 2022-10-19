@@ -2,6 +2,7 @@ import {
   createPurchase,
   findPurchasesByUserId,
   findPurchaseById,
+  deletePurchase,
 } from "../repository/purchaseRepository.js";
 import { StatusCodes } from "http-status-codes";
 
@@ -46,5 +47,16 @@ export class PurchaseController {
     }
 
     return res.status(StatusCodes.OK).json(purchase);
+  }
+
+  async deletePurchase(req, res) {
+    const idPurchase = parseInt(req.params.idPurchase);
+    const result = await deletePurchase(idPurchase);
+
+    if ("errorCode" in result) {
+      return res.status(StatusCodes.BAD_REQUEST).json(result);
+    }
+
+    return res.status(StatusCodes.NO_CONTENT).json({});
   }
 }
