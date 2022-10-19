@@ -21,6 +21,10 @@ async function findShoppingListById(id) {
         select: {
           id: true,
           name: true,
+          checked: true,
+        },
+        orderBy: {
+          id: "asc",
         },
       },
     },

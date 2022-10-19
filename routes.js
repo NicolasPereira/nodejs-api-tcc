@@ -19,6 +19,8 @@ import { createPurchaseValidator } from "./src/purchases/validators/createPurcha
 import { PurchasedProductsController } from "./src/purchasedProducts/controllers/PurchasedProductsController.js";
 import { createPurchasedProductsValidator } from "./src/purchasedProducts/validators/createPurchasedProductsValidator.js";
 import { DeleteShoppingListController } from "./src/shoppingList/controllers/DeleteShoppingListController.js";
+import { checkedProductsValidator } from "./src/shoppingListProducts/validators/checkedProductsValidator.js";
+
 const routes = express.Router();
 
 const createUser = new CreateUserController();
@@ -70,6 +72,13 @@ routes.post(
   authMiddleware,
   createShoppingListProductsValidator,
   shoppingListProductsController.create
+);
+
+routes.patch(
+  "/shopping-lists/:idShoppingList/products/:idProduct",
+  authMiddleware,
+  checkedProductsValidator,
+  shoppingListProductsController.updateCheckedProduct
 );
 
 routes.delete(

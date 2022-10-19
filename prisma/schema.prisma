@@ -37,6 +37,7 @@ model ShoppingListProducts {
   name           String       @db.VarChar(50)
   shoppingList   ShoppingList @relation(fields: [shoppingListId], references: [id], onDelete: Cascade)
   shoppingListId Int
+  checked        Boolean      @default(false)
 
   @@map("shopping_lists_products")
 }
