@@ -20,6 +20,7 @@ import { PurchasedProductsController } from "./src/purchasedProducts/controllers
 import { createPurchasedProductsValidator } from "./src/purchasedProducts/validators/createPurchasedProductsValidator.js";
 import { DeleteShoppingListController } from "./src/shoppingList/controllers/DeleteShoppingListController.js";
 import { checkedProductsValidator } from "./src/shoppingListProducts/validators/checkedProductsValidator.js";
+import { SmartListControllers } from "./src/smartList/controllers/SmartListController.js";
 
 const routes = express.Router();
 
@@ -33,6 +34,7 @@ const findShoppingListById = new FindShoppingListByIdController();
 const purchaseController = new PurchaseController();
 const purchasedProductsController = new PurchasedProductsController();
 const deleteShoppingListController = new DeleteShoppingListController();
+const smartListController = new SmartListControllers();
 
 routes.post("/", authMiddleware, (req, res) => {
   const applicationName = config.APP_NAME;
@@ -123,6 +125,13 @@ routes.post(
   authMiddleware,
   createPurchasedProductsValidator,
   purchasedProductsController.create
+);
+
+routes.post(
+  "/smart-list",
+  authMiddleware,
+  createShoppingListProductsValidator,
+  smartListController.create
 );
 
 routes.get("/health", (req, res) => {
