@@ -9,15 +9,16 @@ async function insertProductsInPurchased(products, purchaseId) {
   });
 }
 
-async function findProductsByPurchaseId(purchaseId) {
-  await prismaClient.purchasedProducts.findUnique({
+async function findProductsByPurchaseId(id) {
+  const products = await prismaClient.purchasedProducts.findMany({
     where: {
-      purchaseId: purchaseId
+      purchaseId: id,
     },
     select: {
       name: true,
-    }
-  })
+    },
+  });
+  return products;
 }
 
 export { insertProductsInPurchased, findProductsByPurchaseId };
